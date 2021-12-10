@@ -14,9 +14,6 @@ class PostController extends BaseController
      */
     public function executeIndex()
     {
-        $postManager = new PostManager(PDOFactory::getMysqlConnection());
-        $posts = $postManager->getAllPosts();
-
         $this->render(
             'home.php',
             [
@@ -31,23 +28,25 @@ class PostController extends BaseController
 
     public function executeShow()
     {
-        Flash::setFlash('alert', 'je suis une alerte');
-        $arr = array(1, 2, 3, 4,5);
+        $postManager = new PostManager(PDOFactory::getMysqlConnection());
         if (is_numeric($this->params['id'])) 
         {
+            
             $this->render(
                 'show.php',
                 [
-                    'test' => 'article ' . $this->params['id']
+                    'test' => $postManager->getPostById($this->params['id'],'library')
                 ],
                 'Show Page'
             );
         }
         else 
         {
-            foreach ($arr as &$value)
+            
+            $posts = $postManager->getAllPosts('library');
+            foreach ($posts as &$value)
             {
-                $result = $result . 'article ' .'<a href="http://localhost:5555/show/' . $value .'">'. $value.'</a>' . '<hr>';
+                $result = $result . 'article ' .'<a href="http://localhost:5555/show/' . $value[0] .'">'. $value[2].'</a>' . '<hr>';
             }
             $this->render(
                 'showall.php',

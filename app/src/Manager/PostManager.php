@@ -11,24 +11,24 @@ class PostManager extends BaseManager
     /**
      * @return Post[]
      */
-    public function getAllPosts(): array
+    public function getAllPosts(string $table): array
     {
-        // TODO -  Get all posts
-        return [];
+
+        return $this->pdo->query("SELECT * FROM $table")->fetchall();
     }
 
-    public function getPostById(int $id): Post
+    public function getPostById(int $id,string $table): array  //on mets pas le post (pas compris)
     {
-        // TODO - Posts by Id
+        return $this->pdo->query("SELECT * FROM   $table WHERE ID = $id")->fetch();
     }
 
     /**
      * @param Post $post
      * @return Post|bool
      */
-    public function createPost(Post $post)
+    public function createPost(string $table, string $data) //pas fait avec post car pas le temps de comprendre
     {
-        // TODO - create post
+        $this->pdo->query("INSERT INTO $table $data");
         return true;
     }
 
