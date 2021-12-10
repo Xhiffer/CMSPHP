@@ -33,7 +33,6 @@ class PostController extends BaseController
     {
         Flash::setFlash('alert', 'je suis une alerte');
         $arr = array(1, 2, 3, 4,5);
-        $test = [];
         if (is_numeric($this->params['id'])) 
         {
             $this->render(
@@ -51,7 +50,7 @@ class PostController extends BaseController
                 $result = $result . 'article ' .'<a href="http://localhost:5555/show/' . $value .'">'. $value.'</a>' . '<hr>';
             }
             $this->render(
-                'show.php',
+                'showall.php',
                 [
                     'test' => $result
                 ],
@@ -66,6 +65,14 @@ class PostController extends BaseController
             'author.php',
             [],
             'Auteur'
+        );
+    }
+    public function executeLogin()
+    {
+        $this->render(
+            'login.php',
+            [],
+            'Login'
         );
     }
 }
