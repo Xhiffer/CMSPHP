@@ -75,4 +75,30 @@ class PostController extends BaseController
             'Login'
         );
     }
+    public function executeUserlist()
+    {
+        $arr = array(1, 2, 3, 4,5);
+        $result = [];
+        foreach ($arr as &$value)
+        {
+            array_push($result,array($value,1,2));
+        }
+        $this->render(
+            'userlist.php',
+            [
+                'test' => $result
+            ],
+            'Login'
+        );
+    }
+
+    
+    public function executeAdmin()
+    {
+        $this->render(
+            'admin.php',
+            [],
+            'Admin'
+        );
+    }
 }
